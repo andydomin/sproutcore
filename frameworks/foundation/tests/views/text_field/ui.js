@@ -66,10 +66,38 @@
     hint: "Full Name", 
     value: 'John Doe',
     isEditable: NO
+  })
+
+  .add("pause", SC.TextFieldView, {
+    validateAndCommitOnPause: YES,
+    pauseLength: 250,
+    allowsErrorAsValue: NO,
+    validator: SC.Validator.extend({
+
+      URL_REGEX: /[\-A-Za-z0-9+&@#\/%?=~_|!:,.;]*[\-A-Za-z0-9+&@#\/%=~_|]/i,
+      validateCommit: function(value) {
+        var completeValue = this._validateFunction(value),
+            httpMatcher = /^(http|https):\/\//;
+
+        if(SC.typeOf(completeValue) === SC.T_STRING){
+          completeValue = httpMatcher.test(completeValue) ? completeValue : "http://" + completeValue;
+        }
+        return completeValue;
+      },
+      
+      /* the actual validation happens here */
+      _validateFunction: function(value) {
+        var urlMatcher = this.URL_REGEX,
+            ret = value;
+        if(!urlMatcher.test(value)) {
+          ret = SC.Error.create({errorValue: value, message: "_Invalid Hyperlink".loc(), toString: function(){return this.get('message');}});
+        }
+        return ret;
+      }
+    }),
+    value: null
   });
-  
-  
-    
+
 pane.show(); // add a test to show the test pane
 
 // ..........................................................
@@ -619,6 +647,26 @@ test("focus then lose key responder", function() {
     ok(!view.$().hasClass('focus'), 'view layer should NOT have focus class');
   }, 100);  
   
+});
+
+test("pausing after changing will trigger update", function () {
+  var textField = pane.view('pause');
+  var input = textField.$('input');
+  equals(textField.get('value'),null,'Value is null');
+
+  SC.RunLoop.begin();
+  SC.Event.trigger(input, 'focus');
+  input.val('www.google.com');
+  equals(input.val(),'www.google.com','Value is www.google.com');
+  SC.Event.trigger(input, 'change');
+  SC.RunLoop.end();
+
+  stop();
+
+  setTimeout(function () {
+    start();
+    equals(textField.get('value'),'http://www.google.com','Value is http://www.google.com after pause');
+  },300);
 });
 
 })();

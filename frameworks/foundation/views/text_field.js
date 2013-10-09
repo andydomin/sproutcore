@@ -33,6 +33,18 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
 
   applyImmediately: YES,
 
+
+  /**
+    If YES, when a user pauses after a field change, it will run the validator
+    and update similar to commitEditing, but without losing focus.
+  */
+  validateAndCommitOnPause: NO,
+
+  /**
+    How long to wait when the field changes to run 
+  */
+  pauseLength: 750,
+
   /**
     If YES, the field will hide its text from display. The default value is NO.
   */
@@ -183,6 +195,10 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
   commitEditing: function() {
     var value, type;
 
+    if (this._pause) {
+      this._pause.invalidate();
+    }
+
     if (this.get('isEditing')) {
       this.beginPropertyChanges();
       value = this.getValidatedValueFromFieldValue(NO); // transform raw text into validated value
@@ -202,6 +218,20 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
     }
   
     return YES ;
+  },
+
+  setValidatedValue: function () {
+    var value, type;
+    value = this.getValidatedValueFromFieldValue(NO); // transform raw text into validated value
+
+    if ((SC.typeOf(value) === SC.T_ERROR) && !this.get('allowsErrorAsValue')) { return; }
+    this.beginPropertyChanges();
+
+    this.setIfChanged('value', value);
+    this.setIfChanged('editingValue', value);
+
+    this.applyValueToField(value);
+    this.endPropertyChanges();
   },
 
   /**
@@ -693,7 +723,7 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
     'continuouslyUpdatesValue'.
   */
   fieldValueDidChange: function() {
-    var value = this.getValidatedValueFromFieldValue(YES);
+    var value = this.getValidatedValueFromFieldValue(YES), self = this;
     
     this.beginPropertyChanges();
     
@@ -709,6 +739,21 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
     // validation we have applied
     this.applyValueToField(value);
     this.endPropertyChanges();
+
+    if (this.get('validateAndCommitOnPause')) {
+      var pause = this._pause, interval = this.get('pauseLength');
+      if (pause) {
+        pause.invalidate();
+      }
+
+      this._pause = SC.Timer.schedule({
+        interval: interval,
+        action: function () {
+          self.setValidatedValue();
+          self._pause = null;
+        }
+      });
+    }
   },
   
   _textField_valueDidChange: function() {
