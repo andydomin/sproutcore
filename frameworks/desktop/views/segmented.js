@@ -77,7 +77,7 @@ SC.SegmentedView = SC.View.extend(SC.Control,
   /**
     If YES, titles will be localized before display.
   */
-  localize: YES,
+  localize: NO,
   
   align: SC.ALIGN_CENTER,
   
