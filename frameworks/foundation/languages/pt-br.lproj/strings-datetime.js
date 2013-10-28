@@ -27,5 +27,7 @@ SC.stringsFor('pt-br', {
   '_SC.DateTime.shortDateLongTimePattern': '%d/%m/%Y %H:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%A, %-d de %B de %Y %H:%M',
   '_SC.DateTime.longDateLongTimePattern': '%A, %-d de %B de %Y %H:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 

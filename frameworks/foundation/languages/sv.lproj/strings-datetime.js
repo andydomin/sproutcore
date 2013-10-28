@@ -27,6 +27,8 @@ SC.stringsFor('sv', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y-%m-%d %H:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': 'den %-d %B %Y %H:%M',
   '_SC.DateTime.longDateLongTimePattern': 'den %-d %B %Y %H:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Swedish (Sweden)

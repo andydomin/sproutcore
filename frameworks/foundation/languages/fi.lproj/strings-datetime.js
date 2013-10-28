@@ -27,6 +27,8 @@ SC.stringsFor('fi', {
   '_SC.DateTime.shortDateLongTimePattern': '%-d.%-m.%Y %h:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%-d. %Bta %Y %h:%M',
   '_SC.DateTime.longDateLongTimePattern': '%-d. %Bta %Y %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Finnish (Finland)

@@ -27,6 +27,8 @@ SC.stringsFor('da', {
   '_SC.DateTime.shortDateLongTimePattern': '%d-%m-%Y %H:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%-d. %B %Y %H:%M',
   '_SC.DateTime.longDateLongTimePattern': '%-d. %B %Y %H:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Danish (Denmark)

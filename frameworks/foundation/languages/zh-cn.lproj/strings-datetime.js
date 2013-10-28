@@ -27,6 +27,8 @@ SC.stringsFor('zh-cn', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y/%-m/%-d %h:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%Y年%-m月%-d日 %h:%M',
   '_SC.DateTime.longDateLongTimePattern': '%Y年%-m月%-d日 %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 
 // Chinese

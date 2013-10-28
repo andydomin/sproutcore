@@ -27,6 +27,8 @@ SC.stringsFor('zh-tw', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y/%-m/%-d %p %I:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%Y年%-m月%-d日 %p %I:%M',
   '_SC.DateTime.longDateLongTimePattern': '%Y年%-m月%-d日 %p %I:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 
 // Chinese

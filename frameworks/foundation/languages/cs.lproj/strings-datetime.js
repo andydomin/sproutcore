@@ -27,6 +27,8 @@ SC.stringsFor('cs', {
   '_SC.DateTime.shortDateLongTimePattern': '%-d.%-m.%Y %h:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%-d. %B %Y %h:%M',
   '_SC.DateTime.longDateLongTimePattern': '%-d. %B %Y %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 
 // Czech (Czech Republic)

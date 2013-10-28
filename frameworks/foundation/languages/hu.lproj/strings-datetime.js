@@ -27,6 +27,8 @@ SC.stringsFor('hu', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y.%m.%d. %h:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%Y. %B %-d. %h:%M',
   '_SC.DateTime.longDateLongTimePattern': '%Y. %B %-d. %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Hungarian (Hungary)

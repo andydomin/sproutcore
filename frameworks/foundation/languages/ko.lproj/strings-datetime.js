@@ -27,6 +27,8 @@ SC.stringsFor('ko', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y-%m-%d %p %i:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%Y년 %-m월 %-d일 %A %p %i:%M',
   '_SC.DateTime.longDateLongTimePattern': '%Y년 %-m월 %-d일 %A %p %i:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Korean (Korea)

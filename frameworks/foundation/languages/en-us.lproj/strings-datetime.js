@@ -27,6 +27,8 @@ SC.stringsFor('en-us', {
   '_SC.DateTime.shortDateLongTimePattern': '%-m/%-d/%Y %i:%M:%S %p',
   '_SC.DateTime.longDateShortTimePattern': '%A, %B %d, %Y %i:%M %p',
   '_SC.DateTime.longDateLongTimePattern': '%A, %B %d, %Y %i:%M:%S %p',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // English
@@ -132,6 +134,8 @@ SC.stringsFor('en-za', {
   '_SC.DateTime.shortDateLongTimePattern': '%Y/%m/%d %I:%M:%S %p',
   '_SC.DateTime.longDateShortTimePattern': '%d %B %Y %I:%M %p',
   '_SC.DateTime.longDateLongTimePattern': '%d %B %Y %I:%M:%S %p',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 
 // English (Jamaica)
@@ -231,6 +235,8 @@ SC.stringsFor('en-my', {
   '_SC.DateTime.shortDateLongTimePattern': '%-d/%-m/%Y %i:%M:%S %p',
   '_SC.DateTime.longDateShortTimePattern': '%A, %-d %B, %Y %i:%M %p',
   '_SC.DateTime.longDateLongTimePattern': '%A, %-d %B, %Y %i:%M:%S %p',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 
 // English (Singapore)
@@ -245,5 +251,7 @@ SC.stringsFor('en-sg', {
   '_SC.DateTime.shortDateLongTimePattern': '%-d/%-m/%Y %i:%M:%S %p',
   '_SC.DateTime.longDateShortTimePattern': '%A, %-d %B, %Y %i:%M %p',
   '_SC.DateTime.longDateLongTimePattern': '%A, %-d %B, %Y %i:%M:%S %p',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 

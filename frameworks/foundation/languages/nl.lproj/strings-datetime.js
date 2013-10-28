@@ -27,6 +27,8 @@ SC.stringsFor('nl', {
   '_SC.DateTime.shortDateLongTimePattern': '%-d-%-m-%Y %h:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%A %-d %B %Y %h:%M',
   '_SC.DateTime.longDateLongTimePattern': '%A %-d %B %Y %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1 %',
+  '_SC.Decimal.percentNegativePattern': '-%@1 %',
 });
 
 // Dutch (Netherlands)
@@ -42,5 +44,7 @@ SC.stringsFor('nl-be', {
   '_SC.DateTime.shortDateShortTimeLabel': 'DD/MM/YYYY HH:MM',
   '_SC.DateTime.shortDateShortTimeExample': '13/07/2013 14:30',
   '_SC.DateTime.shortDateLongTimePattern': '%-d/%m/%Y %h:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%@1%',
+  '_SC.Decimal.percentNegativePattern': '-%@1%',
 });
 

@@ -27,6 +27,8 @@ SC.stringsFor('tr', {
   '_SC.DateTime.shortDateLongTimePattern': '%d.%m.%Y %H:%M:%S',
   '_SC.DateTime.longDateShortTimePattern': '%d %B %Y %A %H:%M',
   '_SC.DateTime.longDateLongTimePattern': '%d %B %Y %A %H:%M:%S',
+  '_SC.Decimal.percentPositivePattern': '%%@1',
+  '_SC.Decimal.percentNegativePattern': '-%%@1',
 });
 
 // Turkish (Turkey)
