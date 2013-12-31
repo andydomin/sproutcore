@@ -163,52 +163,37 @@ SC.ProgressView = SC.View.extend(SC.Control, {
         offset = (isIndeterminate && isRunning) ? 
                 (Math.floor(Date.now()/75)%offsetRange-offsetRange) : 0;
   
+    //
+    var percentNum = this.get("_percentageNumeric") * 100;
+
     // compute value for setting the width of the inner progress
     if (!isEnabled) {
       value = "0%" ;
     } else if (isIndeterminate) {
       value = "120%";
     } else {
-      value = (this.get("_percentageNumeric") * 100) + "%";
+      value = (percentNum) + "%";
     }
-
-    var classNames = {
-      'sc-indeterminate': isIndeterminate,
-      'sc-empty': (value <= 0),
-      'sc-complete': (value >= 100)
-    };
     
-    if(firstTime) {
-      var classString = this._createClassNameString(classNames);
-      context.push('<div class="sc-inner ', classString, '" style="width: ', 
-                    value, ';left: ', offset, 'px;">',
-                    '<div class="sc-inner-head">','</div>',
-                    '<div class="sc-inner-tail"></div></div>',
-                    '<div class="sc-outer-head"></div>',
-                    '<div class="sc-outer-tail"></div>');
+    // if this item already exists, we don't need to reconstruct the styles
+    var progressBarObj = SC.$("#sc-progress-emails");
+    if(progressBarObj.length==0) 
+    {
+        var str = "progress";
+
+        if( percentNum<100 || isIndeterminate)
+          str += " progress-striped active";
+
+        context.push(
+          '<div id="sc-progress-emails" class="' + str + '" style="width:100%;"><div class="progress-bar"  role="progressbar" style="width: ', value, '"></div></div>'
+                   );
     }
-    else {
-      context.setClass(classNames);
-      inner = this.$('.sc-inner');
-      animatedBackground = this.get('animatedBackgroundMatrix');
-      cssString = "width: "+value+"; ";
-      cssString = cssString + "left: "+offset+"px; ";
-      if (animatedBackground.length === 3 ) {
-        inner.css('backgroundPosition', '0px -'+ 
-                (animatedBackground[0] + 
-                animatedBackground[1]*this._currentBackground)+'px');
-        if(this._currentBackground===animatedBackground[2]-1
-           || this._currentBackground===0){
-          this._nextBackground *= -1;
-        }
-        this._currentBackground += this._nextBackground;
-        
-        cssString = cssString + "backgroundPosition: "+backPosition+"px; ";
-        //Instead of using css() set attr for faster perf.
-        inner.attr('style', cssString);
-      }else{
-        inner.attr('style', cssString);
-      }
+    else 
+    {
+      //make sure the logic that reassigns classes to elements is the same as when constructed
+      progressBarObj.find(".progress-bar").css("width", value);
+      progressBarObj.toggleClass("progress-striped", percentNum<100 || isIndeterminate);
+      progressBarObj.toggleClass("active", percentNum<100 || isIndeterminate);
     }
     
   },
