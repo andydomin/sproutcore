@@ -1128,6 +1128,9 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
   valueObserver: function(){
     // console.log('value observer');
     var val = this.get('value');
+    if (SC.typeOf(val) === SC.T_NUMBER) {
+      val = val+'';
+    }
     if (val && val.length>0) this.set('hintON', NO);
     else this.set('hintON', YES);
   }.observes('value')
