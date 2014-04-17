@@ -1013,7 +1013,12 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
       return NO;
     }
 
-    if (which === 27) return NO ;
+    if (which === 27) {
+      if (SC.browser.mozilla) {
+        evt.originalEvent.preventDefault();
+      }
+      return NO ;
+    }
 
     // handle tab key
     if (which === 9) {
