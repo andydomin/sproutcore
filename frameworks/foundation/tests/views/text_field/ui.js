@@ -103,8 +103,9 @@ pane.show(); // add a test to show the test pane
 // ..........................................................
 // VERIFY STANDARD STATES
 // 
-pane.verifyEmpty = function verifyEmpty(view, expectedHint) {
-  var input = view.$('input');
+pane.verifyEmpty = function verifyEmpty(view, expectedHint, fieldtype) {
+  fieldtype = fieldtype || 'input';
+  var input = view.$(fieldtype);
   var layer = view.$();
   ok(!layer.hasClass('not-empty'), 'layer should not have not-empty class');
   if(SC.browser.safari) equals(input.val(), '', 'input should have empty value');
@@ -114,15 +115,16 @@ pane.verifyEmpty = function verifyEmpty(view, expectedHint) {
     if (hint.length===1) {
     hint = hint.text();
   } else {
-    hint = view.$('input');
+    hint = input;
     hint = hint.attr('placeholder');
   }
   equals(hint, expectedHint, 'hint span should have expected hint');  }
 
 };
 
-pane.verifyNotEmpty = function verifyNotEmpty(view, expectedValue, expectedHint) {
-  var input = view.$('input');
+pane.verifyNotEmpty = function verifyNotEmpty(view, expectedValue, expectedHint, fieldtype) {
+  fieldtype = fieldtype || 'input';
+  var input = view.$(fieldtype);
   var layer = view.$();
   
   ok(layer.hasClass('not-empty'), 'layer should have not-empty class');
@@ -133,16 +135,17 @@ pane.verifyNotEmpty = function verifyNotEmpty(view, expectedValue, expectedHint)
     if (hint.length===1) {
     hint = hint.text();
   } else {
-    hint = view.$('input');
+    hint = input;
     hint = hint.attr('placeholder');
   }
   equals(hint, expectedHint, 'hint span should have expected hint');  }
 
 };
 
-pane.verifyDisabled = function verifyDisabled(view, isDisabled) {
+pane.verifyDisabled = function verifyDisabled(view, isDisabled, fieldtype) {
+  fieldtype = fieldtype || 'input';
+  var input = view.$(fieldtype);
   var layer = view.$();
-  var input = view.$('input');
   
   if (isDisabled) {
     ok(layer.hasClass('disabled'), 'layer should have disabled class');
@@ -153,9 +156,10 @@ pane.verifyDisabled = function verifyDisabled(view, isDisabled) {
   }
 };
 
-pane.verifyEditable = function verifyDisabled(view, isEditable) {
+pane.verifyEditable = function verifyDisabled(view, isEditable, fieldtype) {
+  fieldtype = fieldtype || 'input';
+  var input = view.$(fieldtype);
   var layer = view.$();
-  var input = view.$('input');
   
   if (!isEditable) {
     ok(layer.hasClass('readonly'), 'layer should have readonly class');
@@ -198,27 +202,27 @@ test("disabled - with value", function() {
 });
 
 test("textarea - empty", function() {
-   var view = pane.view('empty');
-   pane.verifyEmpty(view, 'Full Name');
-   pane.verifyDisabled(view, NO);
+   var view = pane.view('textarea - empty');
+   pane.verifyEmpty(view, 'Full Name', 'textarea');
+   pane.verifyDisabled(view, NO, 'textarea');
 });
 
 test("textarea - with value", function() {
-  var view = pane.view('with value');
-  pane.verifyNotEmpty(view, 'John Doe', 'Full Name');
-  pane.verifyDisabled(view, NO);
+  var view = pane.view('textarea - with value');
+  pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
+  pane.verifyDisabled(view, NO, 'textarea');
 });
 
 test("textarea - disabled - empty", function() {
-  var view = pane.view('disabled - empty');
-  pane.verifyEmpty(view, 'Full Name');
-  pane.verifyDisabled(view, YES);
+  var view = pane.view('textarea - disabled - empty');
+  pane.verifyEmpty(view, 'Full Name', 'textarea');
+  pane.verifyDisabled(view, YES, 'textarea');
 });
 
 test("textarea - disabled - with value", function() {
-  var view = pane.view('disabled - with value');
-  pane.verifyNotEmpty(view, 'John Doe', 'Full Name');
-  pane.verifyDisabled(view, YES);
+  var view = pane.view('textarea - disabled - with value');
+  pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
+  pane.verifyDisabled(view, YES, 'textarea');
 });
 
 test("readonly - empty", function() {
