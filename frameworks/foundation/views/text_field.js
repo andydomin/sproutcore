@@ -140,7 +140,6 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
   */
   rightAccessoryView: null,
   
-  
   /**
     This property will enable disable HTML5 spell checking if available on the 
     browser. As of today Safari 4+, Chrome 3+ and Firefox 3+ support it  
@@ -150,7 +149,12 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
   
   maxLength: 5096,
   
-  
+  /**
+    This property will turn on or off wrapping in a textarea. Firefox unfortunately ignores CSS changes that are 
+    supposed to control this, so the old-school html1 way is the only reliable way to do it.
+   */
+  wrapTextArea: YES,
+
   _isFocused: NO,
   
   
@@ -339,7 +343,7 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
   // INTERNAL SUPPORT
   //
 
-  displayProperties: 'hint fieldValue editingValue isEditing leftAccessoryView rightAccessoryView isTextArea isEditable value'.w(),
+  displayProperties: 'hint fieldValue editingValue isEditing leftAccessoryView rightAccessoryView isTextArea wrapTextArea isEditable value'.w(),
 
   createChildViews: function() {
     sc_super();
@@ -489,7 +493,7 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
     var hint = this.get('hint'), activeState, name, adjustmentStyle, type, 
         hintElements, element, paddingElementStyle, fieldClassNames,
         spellCheckEnabled=this.get('spellCheckEnabled'), spellCheckString,
-        maxLength = this.get('maxLength'), isOldSafari;
+        maxLength = this.get('maxLength'), isOldSafari, wrapAttribute;
         
     context.setClass('text-area', this.get('isTextArea'));
     
@@ -532,8 +536,9 @@ SC.TextFieldView = SC.FieldView.extend(SC.StaticLayout, SC.Editable,
       
       // Render the input/textarea field itself, and close off the padding.
       if (this.get('isTextArea')) {
+        wrapAttribute = this.get('wrapTextArea') ? '' : 'wrap="off"';
         context.push('<textarea class="',fieldClassNames,'" name="', name, 
-                      '" ', activeState, ' placeholder="',hint, '"',
+                      '" ', activeState, wrapAttribute, ' placeholder="',hint, '"',
                       spellCheckString,' maxlength="', maxLength, '">', 
                       value, '</textarea></span>') ;
       }

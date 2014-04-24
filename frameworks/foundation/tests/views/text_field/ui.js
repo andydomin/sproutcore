@@ -39,7 +39,8 @@
   .add("textarea - with value", SC.TextFieldView, { 
     hint: "Full Name", 
     value: 'John Doe',
-    isTextArea: YES
+    isTextArea: YES,
+    wrapTextArea: NO
   })
   
   .add("textarea - disabled - empty", SC.TextFieldView, { 
@@ -205,12 +206,16 @@ test("textarea - empty", function() {
    var view = pane.view('textarea - empty');
    pane.verifyEmpty(view, 'Full Name', 'textarea');
    pane.verifyDisabled(view, NO, 'textarea');
+   var input = view.$('textarea');
+   equals(input[0].wrap, '', "wrap should be empty (browser defaults to on)");
 });
 
 test("textarea - with value", function() {
   var view = pane.view('textarea - with value');
   pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
   pane.verifyDisabled(view, NO, 'textarea');
+  var input = view.$('textarea');
+  equals(input[0].wrap, 'off', "wrap should be turned off");
 });
 
 test("textarea - disabled - empty", function() {
