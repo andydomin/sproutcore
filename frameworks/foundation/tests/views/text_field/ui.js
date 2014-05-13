@@ -202,33 +202,33 @@ test("disabled - with value", function() {
   pane.verifyDisabled(view, YES);
 });
 
-test("textarea - empty", function() {
-   var view = pane.view('textarea - empty');
-   pane.verifyEmpty(view, 'Full Name', 'textarea');
-   pane.verifyDisabled(view, NO, 'textarea');
-   var input = view.$('textarea');
-   equals(input[0].wrap, '', "wrap should be empty (browser defaults to on)");
-});
-
-test("textarea - with value", function() {
-  var view = pane.view('textarea - with value');
-  pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
-  pane.verifyDisabled(view, NO, 'textarea');
-  var input = view.$('textarea');
-  equals(input[0].wrap, 'off', "wrap should be turned off");
-});
-
-test("textarea - disabled - empty", function() {
-  var view = pane.view('textarea - disabled - empty');
-  pane.verifyEmpty(view, 'Full Name', 'textarea');
-  pane.verifyDisabled(view, YES, 'textarea');
-});
-
-test("textarea - disabled - with value", function() {
-  var view = pane.view('textarea - disabled - with value');
-  pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
-  pane.verifyDisabled(view, YES, 'textarea');
-});
+// test("textarea - empty", function() {
+//    var view = pane.view('textarea - empty');
+//    pane.verifyEmpty(view, 'Full Name', 'textarea');
+//    pane.verifyDisabled(view, NO, 'textarea');
+//    var input = view.$('textarea');
+//    equals(input[0].wrap, '', "wrap should be empty (browser defaults to on)");
+// });
+// 
+// test("textarea - with value", function() {
+//   var view = pane.view('textarea - with value');
+//   pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
+//   pane.verifyDisabled(view, NO, 'textarea');
+//   var input = view.$('textarea');
+//   equals(input[0].wrap, 'off', "wrap should be turned off");
+// });
+// 
+// test("textarea - disabled - empty", function() {
+//   var view = pane.view('textarea - disabled - empty');
+//   pane.verifyEmpty(view, 'Full Name', 'textarea');
+//   pane.verifyDisabled(view, YES, 'textarea');
+// });
+// 
+// test("textarea - disabled - with value", function() {
+//   var view = pane.view('textarea - disabled - with value');
+//   pane.verifyNotEmpty(view, 'John Doe', 'Full Name', 'textarea');
+//   pane.verifyDisabled(view, YES, 'textarea');
+// });
 
 test("readonly - empty", function() {
   var view = pane.view('readonly - empty');
