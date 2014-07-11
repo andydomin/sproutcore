@@ -1113,7 +1113,7 @@ SC.Store = SC.Object.extend( /** @scope SC.Store.prototype */ {
     } else storeKey = id ? recordType.storeKeyFor(id) : null;
     
     if (storeKey && (this.readStatus(storeKey) === SC.Record.EMPTY)) {
-      storeKey = this.retrieveRecord(recordType, id, null, null, null, params);
+      storeKey = this.retrieveRecord(recordType, id, null, null, params ? params.callback : null, params);
     }
     
     // now we have the storeKey, materialize the record and return it.
