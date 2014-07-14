@@ -1936,7 +1936,7 @@ SC.Store = SC.Object.extend( /** @scope SC.Store.prototype */ {
     if(callback){
       if(SC.typeOf(callback) === SC.T_FUNCTION){
         delete queue[storeKey];
-        callback.call(); //args?
+        callback.call(null, storeKey);
       }
       else if(SC.typeOf(callback) == SC.T_HASH){
         // TODO: [JH2] This doesn't seem like it would work. Do we use it?
@@ -1946,7 +1946,7 @@ SC.Store = SC.Object.extend( /** @scope SC.Store.prototype */ {
           if(!queue[key].completed) allFinished = YES;
         });
         if(allFinished){
-          callback.callback.call(); // args?
+          callback.callback.call(null, storeKey);
           //cleanup
           keys.forEach(function(key){
             delete queue[key];
