@@ -426,7 +426,7 @@ SC.mixin( /** @scope SC */ {
     }
     
     // the conclusion of which to use (innerText or textContent) should be cached
-    if (typeof element.innerText != "undefined") element.innerText = string;
+    if (typeof element.innerHTML != "undefined") element.innerHTML = string;
     else element.textContent = string;
 
     // generate result
@@ -450,11 +450,9 @@ SC.mixin( /** @scope SC */ {
     @param classNames {String} (Optional) Class names to add to the test element.
     @param ignoreEscape {Boolean} To NOT html escape the string.
   */
-  metricsForString: function(string, exampleElement, classNames, ignoreEscape) {
-    if(!ignoreEscape) string = SC.RenderContext.escapeHTML(string);
-    
+  metricsForString: function(string, exampleElement, classNames, ignoreEscape) {    
     SC.prepareStringMeasurement(exampleElement, classNames);
-    var result = SC.measureString(string);
+    var result = SC.measureString(string, ignoreEscape);
     SC.teardownStringMeasurement();
     return result;
   },
@@ -467,9 +465,8 @@ SC.mixin( /** @scope SC */ {
     metrics = max;
     SC.prepareStringMeasurement(exampleElement, classNames);
     for(var i = 0, len = strings.length; i<len;i++) {
-      if(!ignoreEscape) str = SC.RenderContext.escapeHTML(strings[i]);
-      else str = strings[i];
-      if (SC.typeOf(str) === SC.T_STRING) metrics = SC.measureString(str.loc());
+      str = strings[i];
+      if (SC.typeOf(str) === SC.T_STRING) metrics = SC.measureString(str.loc(), ignoreEscape);
       if (metrics.height > max.height) max.height = metrics.height;
       if (metrics.width > max.width) max.width = metrics.width;
     }

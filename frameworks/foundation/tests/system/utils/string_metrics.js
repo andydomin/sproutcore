@@ -21,3 +21,14 @@ test('maxMetricsForString.width increases as the length of the strings increases
   after = SC.maxMetricsForStrings(arrayOfStrings, '').width;
   ok(after > before, "width of strings should be longer if the string is longer");
 });
+
+test('metricsForString should escape strings', function(){
+  var string = "<stupidString>", escapedString = SC.RenderContext.escapeHTML(string);
+  var stringLength, escapedStringLength;
+  // Pass this string and it will be escaped
+  stringLength = SC.metricsForString(string, '').width;
+  // Pass escaped string and ask not to be escaped
+  escapedStringLength = SC.metricsForString(escapedString, '', '', YES).width;
+  ok(stringLength = escapedStringLength, "length of escaped strings equal "  + stringLength);
+});
+
