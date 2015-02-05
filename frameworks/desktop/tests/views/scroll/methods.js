@@ -8,7 +8,7 @@
 /*global module test htmlbody ok equals same stop start */
 
 var pane, view , view2;
-var appleURL='http://photos4.meetupstatic.com/photos/event/4/6/9/9/600_4518073.jpeg';
+var appleURL = sc_static("/images/tests/600_4518073.jpeg");
 module("SC.ScrollView",{
 	setup: function() {
 	  SC.RunLoop.begin();
@@ -18,7 +18,8 @@ module("SC.ScrollView",{
 		     contentView: SC.ImageView.design({value: appleURL, layout: {height:4000, width:4000}})
 		   }),
 		   SC.ScrollView.extend({
-		     contentView: SC.ImageView.design({value: appleURL, layout: {height:2000, width:2000}})
+		     contentView: SC.ImageView.design({value: appleURL, layout: {height:3000, width:3000}}),
+		     isHorizontalScrollerVisible : YES
 		   })
 		   
 		   ],
@@ -117,7 +118,7 @@ test("maximumHorizontalScrollOffset() returns the maximum horizontal scroll dime
   view2.scrollBy(5000, 0);
   view2.get('horizontalScrollOffset');
 
-  equals(view2.get('horizontalScrollOffset'),1900, 'maximum y coordinate should be 1900');	
+  equals(view2.get('horizontalScrollOffset'),2900, 'maximum y coordinate should be 2900');
  
   view2.set('horizontalScrollOffset',old_horizontalScrollOffset);
   view2.set('verticalScrollOffset',old_verticalScrollOffset);
@@ -134,7 +135,7 @@ test("maximumVerticalScrollOffset() returns the maximum vertical scroll dimentio
   view2.set('verticalScrollOffset',old_verticalScrollOffset);
   view2.scrollBy(0, 5000);
   view2.get('maximumVerticalScrollOffset');
-  equals(view2.get('verticalScrollOffset'),1900, 'maximum coordinate should be 1900'); 
+  equals(view2.get('verticalScrollOffset'),2900, 'maximum coordinate should be 2900');
   view2.set('horizontalScrollOffset',old_horizontalScrollOffset);
   view2.set('verticalScrollOffset',old_verticalScrollOffset);
   view2.scrollBy(0,-5000);
