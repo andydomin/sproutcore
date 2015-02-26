@@ -35,6 +35,14 @@
       width: 250,
       height: 150
     }
+  }).add("id and class", SC.WebView, {
+    frameId: 'someId',
+    frameClassName: 'some-class',
+    //set the value later when you need it
+    layout: {
+      width: 250,
+      height: 150
+    }
   });
 
   pane.show(); // add a test to show the test pane
@@ -107,4 +115,21 @@
       start();
     });
   });
+
+  test('id and class',
+  function() {
+    var view = pane.view('id and class');
+    var iframe = view.$('iframe');
+    equals(iframe[0].id, "someId", "should have someId id");
+    equals(iframe[0].className, "some-class", "should have some-class className");
+    SC.RunLoop.begin();
+    view.set('frameId', 'someId2');
+    view.set('frameClassName', 'someClassName2');
+    SC.RunLoop.end();
+    equals(iframe[0].id, "someId2", "should have someId id");
+    equals(iframe[0].className, "someClassName2", "should have someClassName2 className");
+  });
+
+
+
 })();

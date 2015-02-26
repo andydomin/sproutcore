@@ -17,8 +17,10 @@
 SC.WebView = SC.View.extend(SC.Control, {
 /** @scope SC.WebView.prototype */
   classNames: 'sc-web-view',
-  displayProperties: ['value', 'shouldAutoResize'],
+  displayProperties: ['value', 'shouldAutoResize', 'frameId', 'frameClassName'],
 
+  frameId: null,
+  frameClassName: null,
   /**
   The content of the iframe can be bigger than the size specifed when creating
   the view. If you want the view to be auto-resized to the dimensions of the 
@@ -30,15 +32,18 @@ SC.WebView = SC.View.extend(SC.Control, {
   shouldAutoResize: NO,
 
   render: function(context, firstTime) {
-    var src = this.get('value');
+    var src = this.get('value'), frameId = this.get('frameId'), frameClassName = this.get('frameClassName');
     if (firstTime) {
-      context.push('<iframe src="' + src + 
+      context.push('<iframe ' + (frameId ? 'id="' + frameId + '" ' : " ") + (frameClassName ? 'class="' + frameClassName + '" ' : " ") + 'src="' + src + 
       '" style="position: absolute; width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0p;"></iframe>');
     } else {
       var iframe = this.$('iframe');
       // clear out the previous src, to force a reload
       iframe.attr('src', 'javascript:;');
       iframe.attr('src', src);
+      if (frameId) iframe.attr('id', frameId);
+      iframe.removeClass();
+      if (frameClassName) iframe.addClass(frameClassName);
     }
   },
 
