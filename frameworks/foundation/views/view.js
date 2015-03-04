@@ -1083,6 +1083,8 @@ SC.View = SC.Responder.extend(SC.DelegateSupport,
     this.endPropertyChanges() ;
   },
   
+  skipsRenderHTML: NO,
+
   /**
     Your render method should invoke this method to render any child views,
     especially if this is the first time the view will be rendered.  This will
@@ -1098,7 +1100,7 @@ SC.View = SC.Responder.extend(SC.DelegateSupport,
     var cv = this.get('childViews'), len = cv.length, idx, view ;
     for (idx=0; idx<len; ++idx) {
       view = cv[idx] ;
-      if (!view) continue;
+      if (!view || view.get('skipsRenderHTML')) continue;
       context = context.begin(view.get('tagName')) ;
       view.prepareContext(context, firstTime) ;
       context = context.end() ;
